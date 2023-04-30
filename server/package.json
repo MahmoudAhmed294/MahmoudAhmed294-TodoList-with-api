@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon  ./src/index.ts",
-    "install-all": "concurrently \"npm install\" \"cd .. && cd client && npm  install\" ",
     "dev": "concurrently \"npm start\" \"cd .. && cd client && npm  run android\" "
   },
   "keywords": [],

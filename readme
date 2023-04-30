@@ -1,0 +1,55 @@
+
+### Installing
+
+1. Clone the repository to your local machine:
+   ````
+   git clone https://github.com/MahmoudAhmed294/TodoList-with-api
+   ```
+2. Navigate to the project directory:
+   ````
+   cd TodoList-with-api
+   ```
+3. Install the dependencies for the backend API:
+   ````
+   cd server && npm install
+   ```
+4. Install the dependencies for the frontend app:
+   ````
+   cd ../client && npm install
+   ```
+
+### Running the App
+To run the both to gether the client and server:
+
+1. Navigate to the `server` directory:
+   ````
+   cd ../server
+      ```
+
+2. Start :
+   ````
+   npm run dev
+   ```
+
+or run the backend API:
+
+1. Navigate to the `server` directory:
+   ````
+   cd ../server
+   ```
+2. Start the server:
+   ````
+   npm start
+   ```
+
+and run the React Native app:
+
+1. Navigate to the `client` directory:
+   ````
+   cd ../client
+   ```
+2. Start the development server:
+   ````
+   npm start or npm run android
+   ```
+

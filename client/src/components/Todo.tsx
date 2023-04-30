@@ -1,23 +1,47 @@
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import EditTodo from './EditTodo';
 import DeleteTodo from './DeleteTodo';
+import { useUpdateStatusMutation } from '../api/todo.api';
 
 type Props = {
   title: string;
   status: boolean;
+  id:string;
 };
 
-const Todo = ({ title, status }: Props) => {
+const Todo = ({ title, status ,id }: Props) => {
   const [todoStatus, setTodoStatus] = useState<boolean>(status);
+
+  
+  const [updateStatus, { data, isLoading, error }] = useUpdateStatusMutation();
+
+  const handleUpdateStatus = () => {
+    if(id){
+      setTodoStatus(!todoStatus)
+      updateStatus(id);
+    }
+  };
+
+  useEffect(() => {
+    if(data){
+      console.log(data);
+    }
+  }, [data])
+
+  useEffect(() => {
+    if(error){
+      console.log(error);
+    }
+  }, [error])
 
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => setTodoStatus(!todoStatus)}
+          onPress={handleUpdateStatus}
           style={styles.taskButton}
         >
           <View style={todoStatus ? styles.taskMarkerDone : styles.taskMarker}>
@@ -30,8 +54,8 @@ const Todo = ({ title, status }: Props) => {
       </View>
 
       <View style={styles.iconsContainer}>
-        <EditTodo />
-        <DeleteTodo />
+        <EditTodo  id={id} title={title}/>
+        <DeleteTodo id={id}/>
       </View>
     </View>
   );

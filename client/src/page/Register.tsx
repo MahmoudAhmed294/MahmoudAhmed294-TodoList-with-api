@@ -94,7 +94,7 @@ const Register = ({ navigation }: any) => {
         textColor={MD3Colors.neutral0}
         mode="text"
         style={{ marginTop: 16 }}
-        onPress={() => navigation.navigate('Register')}
+        onPress={() => navigation.navigate('Login')}
       >
         you have an account? Login here.
       </Button>

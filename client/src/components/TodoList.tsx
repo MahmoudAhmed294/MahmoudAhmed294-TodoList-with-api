@@ -27,13 +27,14 @@ const TodoList = (props: Props) => {
     }
   }, [error]);
 
+
   return (
     <ScrollView>
       {isLoading ? (
         <Loader />
       ) : todoList.length !== 0 ? (
         todoList.map((value: ITodo) => (
-          <Todo status={value.status} title={value.title} key={value.id} />
+          <Todo status={value.status} title={value.title} id={value.id} key={value.id} />
         ))
       ) : (
         <Text variant="displaySmall">no Task </Text>

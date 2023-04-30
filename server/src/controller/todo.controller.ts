@@ -36,7 +36,7 @@ export const deleteTodoItem = async (req: Request, res: Response, next: NextFunc
       },
     });
 
-    return res.sendStatus(200);
+    return res.status(200).json('deleted');
   } catch (error: any) {
     console.log(error.message);
     return res.sendStatus(404);
@@ -87,14 +87,15 @@ export const updateTodoStatus = async (req: Request, res: Response) => {
       return res.sendStatus(404);
     }
 
-    const newTodoStatus = await prisma.todo.update({
+     await prisma.todo.update({
       where: {
         id: req.params.id,
       },
       data: { status: !currentStatus.status },
     });
 
-    return res.sendStatus(200);
+    return res.status(200).json("update!");
+
   } catch (error) {
     console.log(error);
     return res.status(500);

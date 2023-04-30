@@ -12,15 +12,14 @@ export const todoApi = createApi({
   reducerPath: 'todo',
 
   baseQuery: fetchBaseQuery({
-    baseUrl:  API_URL,
-    prepareHeaders:(headers, { getState }:any) =>{
-      const token = getUser(getState()).token; 
+    baseUrl: API_URL,
+    prepareHeaders: (headers, { getState }: any) => {
+      const token = getUser(getState()).token;
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
-
-    }
+    },
   }),
   endpoints: (builder) => ({
     todoList: builder.query<ITodo[], null>({
@@ -29,8 +28,35 @@ export const todoApi = createApi({
         method: 'get',
       }),
     }),
+    addTodo: builder.mutation<ITodo, string>({
+      query: (payload) => ({
+        url: `/todo`,
+        method: 'post',
+        body: { title: payload },
+      }),
+    }),
 
+    deleteTodo: builder.mutation<ITodo, string>({
+      query: (payload) => ({
+        url: `/todo/${payload}`,
+        method: 'delete',
+      }),
+    }),
+
+    updateTitle: builder.mutation<ITodo, {title:string, id:string}>({
+      query: (payload) => ({
+        url: `/todo/${payload.id}`,
+        method: 'put',
+        body: { title: payload.title },
+      }),
+    }),
+    updateStatus: builder.mutation<ITodo, string>({
+      query: (payload) => ({
+        url: `/todo/${payload}`,
+        method: 'patch',
+      }),
+    }),
   }),
 });
 
-export const { useTodoListQuery } = todoApi;
+export const { useTodoListQuery, useAddTodoMutation, useDeleteTodoMutation ,useUpdateTitleMutation , useUpdateStatusMutation } = todoApi;
